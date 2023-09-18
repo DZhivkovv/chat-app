@@ -1,4 +1,5 @@
 import React from 'react';
+import Footer from './Footer';
 import Lottie from 'lottie-react';
 import animationData from '../assets/animation_lm3tdfmc.json';
 import hobbiesImg from '../assets/featuresImages/hobbies.png' 
@@ -53,6 +54,7 @@ const Home = () => {
                 <p>Make friendships that last for a lifetime. </p>
             </FeaturesSection>
         </div>
+        <Footer/>
         </div>
     )
 }
