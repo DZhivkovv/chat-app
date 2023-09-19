@@ -1,4 +1,5 @@
 import React from 'react';
+import Navbar from './Navbar';
 import Footer from './Footer';
 import Lottie from 'lottie-react';
 import animationData from '../assets/animation_lm3tdfmc.json';
@@ -42,6 +43,7 @@ const FeaturesSection = ({ children, feature, image, isReversed = false }) => {
 const Home = () => {
     return(
         <div className='h-screen'>
+        <Navbar/>
         <HeroSection/>
         <div className='w-full'>
             <FeaturesSection feature='Discover and connect' image={hobbiesImg}>
