@@ -10,7 +10,7 @@ import conversationImg from '../assets/featuresImages/conversation.png'
 const HeroSection = () => {
     return(
         <div className='flex flex-col lg:flex-row h-[90%] w-full'>
-            <div className='w-screen lg:w-1/3  flex flex-col justify-center items-center h-1/3 '>
+            <div className='lg:w-1/3 h-1/3 flex flex-col justify-center items-center  '>
                 <div className='w-full text-center'>
                     <h1 className='text-6xl font-bold py-10'>Sedyanka</h1>
                     <p>Where every chat begins a story.</p>
