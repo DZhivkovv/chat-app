@@ -5,21 +5,10 @@ const links = [
       to: '/'
     },
     {
-        id: 1,
-        name: 'Chatrooms',
-        to: '/chat'
-      },
-    {
-        id: 2,
-        name: 'Login',
-        to: '/login'
-      },
-    {
-        id: 3,
-        name: 'Signup',
-        to: '/signup'
-      },
-      
+      id: 1,
+      name: 'Chatrooms',
+      to: '/chat'
+    },
   ];
     
   export default links
