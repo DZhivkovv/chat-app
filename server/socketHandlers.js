@@ -31,12 +31,24 @@
     });
   }
   
+  // Function to handle sending a message
+  function handleSendMessage(socket) {
+    socket.on("send_message", ({ messageSent, room, authUser }) => {
+      // Broadcast the message to everyone in the room except the sender
+      socket.to(room).emit("save_message", {
+        messageSent,
+        user: authUser.displayName || authUser.email,
+      });
+    });
+  }
+  
   // Export the main function that sets up Socket.io event handlers
   export default (io, rooms) => {
     io.on("connection", (socket) => {
       // Call the individual event handler functions
       handleJoinRoom(socket, rooms);
       handleLeaveRoom(socket);
+      handleSendMessage(socket);
     });
   };
   
