@@ -1,5 +1,7 @@
 import React from "react";
 import Navbar from "../Navbar";
+import ChooseRoom from "./ChooseRoom";
+import ChatRoom from './ChatRoom'
 import useUserStatus from "../../hooks/authentication/useUserStatus";
 import useSocket from "../../hooks/useSocket";
 import useChatRoom from "../../hooks/chat/useChatRoom";
@@ -12,6 +14,13 @@ function ChatApp() {
   return (
     <div className="h-screen">
       <Navbar/>
+
+      {/* If the user hasn't selected a chat room, they will be presented with a menu with different chatrooms from which they can choose. Otherwise, they will be shown the chat room itself. */}
+      {!room ? (
+        <ChooseRoom onRoomClick={handleRoomJoin} />
+      ) : (
+        <ChatRoom socket={socket} room={room} onLeave={handleRoomLeave}/>
+      )}
     </div>
   );
 }
