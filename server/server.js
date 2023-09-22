@@ -3,6 +3,7 @@ import http from "http";
 import { Server } from "socket.io";      
 import cors from "cors";
 import dotenv from 'dotenv';
+import socketHandlers from "./socketHandlers.js";
 
 // Create an express application
 const app = express();
@@ -18,6 +19,13 @@ const io = new Server(server, {
     methods: ["GET", "POST"],
   },
 });
+
+// Initialize an empty object to store chat room data
+const rooms = {};
+
+// Call the custom Socket.io event handlers from the imported module
+socketHandlers(io, rooms);
+
 
 dotenv.config();
 const port = process.env.PORT;
