@@ -23,7 +23,7 @@ const ChooseRoom = ({ onRoomClick }) => {
   return (
     <div className='flex flex-col h-[90%]'>
       <h1 className='choose-room-title text-center pt-5 pb-5'>Choose a chat room: </h1>
-      <div className='room-list-container h-full grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 sm:gap-6 items-center'>
+      <div className='room-list-container h-full grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 items-center'>
         {/* Map through the list of rooms and create a RoomItem for each */}
         {roomsList.map((roomItem) => (
           <RoomItem
