@@ -1,10 +1,34 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
 import useUserStatus from '../hooks/authentication/useUserStatus';
+import useMobileMenu from '../hooks/useMobileMenu';
 import logout from '../utils/logout';
 import links from '../data/navbarLinks';
+import { NavLink } from 'react-router-dom';
+import { GiHamburgerMenu } from 'react-icons/gi';
+import { FaTimes } from 'react-icons/fa';
 
-// Component to display links for authenticated users
+// Display links for authenticated and unauthenticated users
+const NavigationLinks = ({ isMobileMenuOpen }) => {
+  const containerStyle = isMobileMenuOpen
+    ? 'md:hidden absolute top-16 left-0 w-full bg-gray-800 text-white z-20 flex flex-col items-center space-y-5 text-xl py-10 transition transition-all duration-300'
+    : 'hidden md:flex space-x-5';
+
+  return (
+    <div className={containerStyle}>
+      {links.map((link) => (
+        <NavLink
+          key={link.id}
+          to={link.to}
+          className={({ isActive }) => (isActive ? 'font-bold' : '')}
+        >
+          {link.name}
+        </NavLink>
+      ))}
+    </div>
+  );
+};
+
+// Display links for authenticated users only
 const AuthenticatedLinks = ({ authUser, logout }) => (
   <div className='flex items-center'>
     <p className='mx-2 font-bold'>{authUser.email}</p>
@@ -16,8 +40,7 @@ const AuthenticatedLinks = ({ authUser, logout }) => (
     </button>
   </div>
 );
-
-// Component to display links for unauthenticated users
+// Display links for unauthenticated users only
 const UnauthenticatedLinks = () => (
   <div className='flex items-center'>
     <NavLink to='/login' className='bg-blue-700 font-bold text-white px-4 py-2 rounded'>
@@ -29,37 +52,32 @@ const UnauthenticatedLinks = () => (
   </div>
 );
 
-// Main Navbar Component
+const HamburgerMenuIcon = ({ handleClick, isMobileMenuOpen }) => {
+  return (
+    <div className='md:hidden z-50 '>
+      <button onClick={handleClick}>
+        {isMobileMenuOpen ? <FaTimes /> : <GiHamburgerMenu />}
+      </button>
+    </div>
+  );
+};
+
 const Navbar = () => {
   const { authUser } = useUserStatus();
+  const { isMobileMenuOpen, toggleMobileMenu } = useMobileMenu();
 
   return (
-    <nav className='bg-gray-800 text-white px-5 py-3 h-[10%] '>
-      <div className='container mx-auto flex justify-between items-center'>
-        <div className='flex space-x-4'>
-          {/* Mapping and rendering navigation links */}
-          {links.map((link) => (
-            <NavLink
-              key={link.id}
-              to={link.to}
-              className={({ isActive, isPending }) =>
-                isActive ? "font-bold" : ""
-              }
-            >
-              {link.name}
-            </NavLink>
-          ))}
-        </div>
-        {/* Displaying authenticated or unauthenticated links based on user status */}
-        {authUser ? (
-          <AuthenticatedLinks authUser={authUser} logout={logout} />
-        ) : (
-          <UnauthenticatedLinks />
-        )}
-      </div>
+    <nav className='bg-gray-800 text-white px-5 py-3 md:h-[10%] flex justify-between items-center relative'>
+      <HamburgerMenuIcon handleClick={toggleMobileMenu} isMobileMenuOpen={isMobileMenuOpen} />
+      <NavigationLinks isMobileMenuOpen={isMobileMenuOpen} />
+
+      {authUser ? (
+        <AuthenticatedLinks authUser={authUser} logout={logout} />
+      ) : (
+        <UnauthenticatedLinks />
+      )}
     </nav>
   );
 };
 
-// Exporting the Navbar component with React.memo for optimization
 export default React.memo(Navbar);
