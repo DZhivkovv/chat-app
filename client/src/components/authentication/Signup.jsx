@@ -1,13 +1,14 @@
 import React from 'react';
 import useSignup from '../../hooks/authentication/useSignup';
 import WelcomePanel from './WelcomePanel';
+import { SignupMessage } from './Message';
 import UserCredentialsForm from './UserCredentialsForm';
 import Button from '../Button';
 import { Link } from 'react-router-dom';
 import {AiFillGoogleCircle} from 'react-icons/ai'
 
 const Signup = () => {
-    const { signUp, signUpWithGoogle } = useSignup(); //Functions to signup with email/password and with Google
+    const { signUp, signUpWithGoogle, signUpError } = useSignup(); //Functions to signup with email/password and with Google
 
     return (
         <div className="flex h-screen">
@@ -20,6 +21,9 @@ const Signup = () => {
                 
                 {/* Signup form */}
                 <UserCredentialsForm handleSubmit={signUp}>Signup</UserCredentialsForm>
+
+                {/* Displays error message if there is an error */}
+                {signUpError && <SignupMessage error={signUpError}/>}
                 
                 {/* A button for Google signup. */}
                 <div className='flex flex-col items-center'>

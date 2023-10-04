@@ -1,11 +1,13 @@
-import { useCallback } from "react";
+import { useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from 'firebase/auth'
 import { auth } from '../../firebase'
 
 //Custom React hook that encapsulates login functionality for both email/password and Google authentication methods using Firebase.
 const useLogin = () => {
+    const [loginError, setLoginError] = useState(''); // State variable for errors that happened during the login process 
     const navigate = useNavigate();
+
     // Function to log in with email and password
     const login = (event, email, password) => {
         event.preventDefault();
@@ -16,8 +18,8 @@ const useLogin = () => {
             navigate('/');
         })
         .catch((error)=>{
-            // Handle and log any errors that occur during login
-            console.log(error);
+            // Save the error in the state variable for errocrs
+            setLoginError(error)
         })
     }
 
@@ -30,12 +32,13 @@ const useLogin = () => {
                 navigate('/');
             })
             .catch((error) => {
-                console.log(error);
+                {/* Displays error message if there is an error */}
+                setLoginError(error)
             });
     }, [navigate]);
 
     // Return the login and loginWithGoogle functions to be used in components
-    return { login, loginWithGoogle };
+    return { login, loginWithGoogle, loginError };
 }
 
 export default useLogin;

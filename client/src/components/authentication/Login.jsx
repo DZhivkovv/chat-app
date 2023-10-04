@@ -2,11 +2,12 @@ import useLogin from '../../hooks/authentication/useLogin';
 import WelcomePanel from './WelcomePanel'; 
 import UserCredentialsForm from './UserCredentialsForm';
 import Button from '../Button'; 
+import { LoginMessage } from './Message';
 import { Link } from 'react-router-dom';
 import { AiFillGoogleCircle } from 'react-icons/ai';
 
 const Login = () => {
-    const { login, loginWithGoogle } = useLogin(); //Functions to login with email/password and with Google
+    const { login, loginWithGoogle, loginError } = useLogin(); //Functions to login with email/password and with Google
 
     return (
         <div className="flex h-screen">     
@@ -19,8 +20,11 @@ const Login = () => {
                 
                 {/* Login form */}
                 <UserCredentialsForm handleSubmit={login}> Login </UserCredentialsForm>
-                <p className="text-center text-gray-600 mt-4">Or use</p> 
                 
+                {/* Displays error message if there is an error */}
+                {loginError && <LoginMessage error={loginError}/>}
+
+                <p className="text-center text-gray-600 mt-4">Or use</p> 
                 {/* A button for Google login. */}
                 <Button type="button" handleClick={loginWithGoogle} className="mt-4 bg-blue-600 hover:bg-blue-700"> 
                     <AiFillGoogleCircle className='text-3xl text-gray-500  hover:text-blue-400'/>

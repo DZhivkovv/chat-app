@@ -1,9 +1,11 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate hook from React Router
 import { createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from 'firebase/auth'; // Import Firebase authentication functions
 import { auth } from '../../firebase'; // Import the Firebase auth instance
 
 // Custom hook for user signup
 const useSignup = () => {
+    const [signUpError, setSignUpError] = useState(''); // State variable for errors that happened during the signup process
     const navigate = useNavigate();
 
     // Function for email and password signup
@@ -16,7 +18,7 @@ const useSignup = () => {
                 navigate('/login'); // Redirect to the login page after successful signup
             })
             .catch((error) => {
-                console.log(error);
+                setSignUpError(error);
             });
     };
 
@@ -30,11 +32,11 @@ const useSignup = () => {
                 navigate('/login'); // Redirect to the login page after successful Google signup
             })
             .catch((error) => {
-                console.log(error);
+                setSignUpError(error)
             });
     };
 
-    return { signUp, signUpWithGoogle };
+    return { signUp, signUpWithGoogle, signUpError };
 };
 
 export default useSignup;
