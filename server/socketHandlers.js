@@ -2,7 +2,7 @@
   function handleJoinRoom(socket, rooms) {
     socket.on("join_room", ({ room, authUser }) => {
       const { id, roomName } = room;
-      const user = authUser.displayName || authUser.email;
+      const user = authUser.displayName || authUser.email || 'Guest';
       socket.join(id);
   
       // Create the room in the 'rooms' object if it doesn't exist
