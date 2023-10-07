@@ -21,7 +21,7 @@ const ChatRoom = ({ socket, room, onLeave }) => {
   useDisconnect(socket); //Listens in case the authenticated user disconnects from the room and cleans the messages.
   
   if (!authUser) {
-    return <LoadingSpinner/>; // Display a loading spinner if the user data is not loaded yet
+    return <LoadingSpinner>Authenticating... Please wait while we verify your credentials.</LoadingSpinner>; // Display a loading spinner if the user data is not loaded yet
   }
 
 
