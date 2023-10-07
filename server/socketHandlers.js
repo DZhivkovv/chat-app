@@ -30,7 +30,16 @@
       socket.to(id).emit("user_left", user);
     });
   }
-  
+   
+  // Notifies the users in a chat room when another user disconnects
+  function handleUserDisconnect(socket, user, roomId) {
+    if(user){
+      socket.on("disconnect", () => {
+        socket.to(roomId).emit("user_left", user);
+      });        
+    }  
+  }
+
   // Function to handle sending a message
   function handleSendMessage(socket) {
     socket.on("send_message", ({ messageSent, room, authUser }) => {
@@ -48,6 +57,7 @@
       // Call the individual event handler functions
       handleJoinRoom(socket, rooms);
       handleLeaveRoom(socket);
+      handleUserDisconnect(socket);
       handleSendMessage(socket);
     });
   };
