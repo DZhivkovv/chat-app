@@ -15,17 +15,17 @@ const Notification = React.memo(({ notification }) => {
 // Component displaying single chat message
 const Message = React.memo(({ message, user, isCurrentUser }) => {
   // Determines the appearance of the messages based on whether they are sent by the logged-in user or other user.
-  const messageContainerClass = 'w-[250px] flex mb-2 mx-3';
+  const messageContainerClass = 'flex mb-2 mx-3 break-all';
   const currentUserClass = 'bg-green-300 text-white';
   const otherUserClass = 'bg-gray-300 text-black';  
   const messageClass = isCurrentUser ? currentUserClass : otherUserClass;
 
   return (
-    <div className={`${messageContainerClass} ${isCurrentUser ? '' : 'ml-auto'}`}>
-      <p className={`bg-blue-300 p-2 rounded-lg ${messageClass}`}>
-        {isCurrentUser ? 'You: ' : `${user}: `}
-        {message}
-      </p>
+    <div className={`${messageContainerClass}`}>
+      <div className={`p-2 rounded-lg ${messageClass}`}>
+        <p className='font-bold'>{isCurrentUser ? 'You: ' : `${user}: `}</p>
+        <p>{message}</p>
+      </div>
     </div>
   );
 });
@@ -40,7 +40,7 @@ const ChatMessages =({ messages }) => {
   }
 
   return (
-    <div className="flex flex-col max-h-[60vh] overflow-y-auto" ref={chatMessagesRef}>
+    <div className="flex flex-col max-h-[60vh] overflow-y-auto overflow-hidden" ref={chatMessagesRef}>
       {messages.map((item, index) => {
         if (item.message) {
           return (

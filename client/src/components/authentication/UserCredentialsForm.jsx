@@ -3,16 +3,16 @@ import Input from '../Input';
 import useAuthFields from '../../hooks/authentication/useAuthFields';
 
 // A form component used in Login and Signup pages
-const UserCredentialForm = ({ children, handleSubmit }) => {
+const UserCredentialForm = ({ children, onSubmit }) => {
     // Use the custom hook to manage email and password fields
     const { email, setEmail, password, setPassword } = useAuthFields();
 
     return (
         <form
             onSubmit={(event) => {
-                handleSubmit(event, email, password);
+                onSubmit(event, email, password);
             }}
-            className="w-full max-w-xs"
+            className="w-full max-w-xs flex flex-col items-center text-black"
         >
             {/* Input field for email */}
             <Input

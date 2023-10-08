@@ -21,8 +21,8 @@ export const LoginMessage = ({ error = '' }) => {
     }
 
     return (
-        <div>
-            <p className='text-red-500 font-bold mt-5'>{message}</p>
+        <div className='absolute bottom-10 my-5'>
+            <p className='text-red-500 font-bold'>{message}</p>
         </div>
     );
 };
@@ -45,8 +45,8 @@ export const SignupMessage = ({ error = '' }) => {
     }
 
     return (
-        <div>
-            <p className='text-red-500 font-bold mt-5'>{message}</p>
+        <div className='absolute bottom-10 my-5'>
+            <p className='text-red-500 font-bold'>{message}</p>
         </div>
     );
 };

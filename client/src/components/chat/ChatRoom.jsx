@@ -7,6 +7,7 @@ import LoadingSpinner from '../LoadingSpinner'
 import ChatMessages from './ChatMessages'; 
 import ExitRoom from './ExitRoom'; 
 import { MdSend } from 'react-icons/md';
+import useDisconnect from '../../hooks/chat/useDisconnect';
 
 const ChatRoom = ({ socket, room, onLeave }) => {
   const { authUser } = useUserStatus(); // Get data about the authenticated user 
@@ -16,10 +17,11 @@ const ChatRoom = ({ socket, room, onLeave }) => {
     setMessageSent,
     handleSendMessage,
   } = useChatSocket(socket, room); // Initialize functionality for sending messages using the useChatSocket custom hook
-  
+
+  useDisconnect(socket); //Listens in case the authenticated user disconnects from the room and cleans the messages.
   
   if (!authUser) {
-    return <LoadingSpinner/>; // Display a loading spinner if the user data is not loaded yet
+    return <LoadingSpinner>Authenticating... Please wait while we verify your credentials.</LoadingSpinner>; // Display a loading spinner if the user data is not loaded yet
   }
 
 

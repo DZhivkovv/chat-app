@@ -6,7 +6,7 @@ const useSocket = () => {
   const [socket, setSocket] = useState(null);
   useEffect(() => {
     // Create a new socket connection to the server.
-    const newSocket = io.connect("http://localhost:3001");
+    const newSocket = io.connect("https://chat-app-frontend-0u5l.onrender.com");
     setSocket(newSocket);
 
     // Disconnect the socket when the component unmounts.

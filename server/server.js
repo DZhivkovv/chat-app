@@ -3,6 +3,7 @@ import http from "http";
 import { Server } from "socket.io";      
 import cors from "cors";
 import dotenv from 'dotenv';
+dotenv.config();
 import socketHandlers from "./socketHandlers.js";
 
 // Create an express application
@@ -15,7 +16,7 @@ const server = http.createServer(app);
 // Initialize Socket.io with CORS configuration on top of the HTTP server
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: "https://chat-app-frontend-0u5l.onrender.com",
     methods: ["GET", "POST"],
   },
 });
@@ -27,9 +28,5 @@ const rooms = {};
 socketHandlers(io, rooms);
 
 
-dotenv.config();
 const port = process.env.PORT;
-
-server.listen(port, () => {
-  console.log("SERVER IS RUNNING");
-});
+server.listen(port);
