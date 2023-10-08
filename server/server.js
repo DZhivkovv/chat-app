@@ -1,9 +1,8 @@
-import express from "express";           // Express for creating the HTTP server
+import express from "express";
 import http from "http";                 
 import { Server } from "socket.io";      
 import cors from "cors";
 import dotenv from 'dotenv';
-dotenv.config();
 import socketHandlers from "./socketHandlers.js";
 
 // Create an express application
@@ -28,5 +27,9 @@ const rooms = {};
 socketHandlers(io, rooms);
 
 
+dotenv.config();
 const port = process.env.PORT;
-server.listen(port);
+
+server.listen(port, () => {
+  console.log("SERVER IS RUNNING");
+});
