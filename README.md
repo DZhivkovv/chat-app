@@ -8,7 +8,7 @@ Sedyanka is a chat application that offers a diverse range of chat rooms, each d
 ![](https://i.imgur.com/NNsp1gN.jpg)
 ![](https://i.imgur.com/AY1DEKS.jpg)
 
-##Technologies used
+## Technologies used
 
 * React
 * Tailwind CSS
